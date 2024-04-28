@@ -127,6 +127,15 @@ for(let i=0 ; i < nomsDisponibles.length ; i++){
     disponiblesElement.appendChild(nomElement)
 }
 
-const pElementDisponible = document.createElement('p')
+const pElementDisponible = document.createElement('p');
 pElementDisponible.innerText = "Pièces disponibles:";
-document.querySelector('.disponibles').appendChild(pElementDisponible).appendChild(disponiblesElement)
+document.querySelector('.disponibles').appendChild(pElementDisponible).appendChild(disponiblesElement);
+
+const inputPrixMax = document.querySelector('#prix-max');
+inputPrixMax.addEventListener('input', function () {
+    const piecesFiltrees = pieces.filter(function(piece) {
+        return piece.prix <= inputPrixMax.value;
+    });
+    document.querySelector(".fiches").innerHTML = "";
+    genererPieces(piecesFiltrees);
+});
