@@ -1,4 +1,4 @@
-import { ajoutListenersAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherAvis } from "./avis.js";
 //Récupération des pièces eventuellement stockées dans le localStorage
 let pieces = window.localStorage.getItem('pieces');
 
@@ -58,6 +58,16 @@ function genererPieces(pieces){
 }
 
 genererPieces(pieces);
+
+for (let i = 0; i < pieces.length; i++) {
+    const id = pieces[i].id;
+    const avisJSON = window.localStorage.getItem(`avis-piece-${id}`);
+    const avis = JSON.parse(avisJSON);
+    if (avis !== null) {
+        const pieceElement = document.querySelector(`article[data-id="${id}"]`);
+        afficherAvis(pieceElement, avis);
+    }
+}
 
  //gestion des boutons 
 const boutonTrier = document.querySelector(".btn-trier");
